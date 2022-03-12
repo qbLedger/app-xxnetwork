@@ -42,9 +42,9 @@ async function activateSecretMode(sim: any) {
     await sim.clickBoth('', false)
   }
 
-  let reviewSteps = 7
-  if (sim.startOptions.model === 'nanox') {
-    reviewSteps = 6
+  let reviewSteps = 6
+  if (sim.startOptions.model === 'nanos') {
+    reviewSteps = 7
   }
 
   // Review warning message
@@ -57,7 +57,7 @@ async function activateSecretMode(sim: any) {
 }
 
 describe('Standard', function () {
-  test.each(models)('main secret menu (%s)', async function (m) {
+  test.skip.each(models)('main secret menu (%s)', async function (m) {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
