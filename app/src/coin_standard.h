@@ -28,10 +28,10 @@ extern "C" {
 #define HDPATH_3_DEFAULT     (0u)
 #define HDPATH_4_DEFAULT     (0u)
 
-#define MENU_MAIN_APP_LINE1                 "Elixxir"
+#define MENU_MAIN_APP_LINE1                 "xx network"
 #define MENU_MAIN_APP_LINE2                 "Ready"
 #define MENU_MAIN_APP_LINE2_SECRET          "XX RECOVERY"
-#define APPVERSION_LINE1                    "Elixxir"
+#define APPVERSION_LINE1                    "xx network"
 #define APPVERSION_LINE2                    "v" APPVERSION
 
 #ifdef __cplusplus

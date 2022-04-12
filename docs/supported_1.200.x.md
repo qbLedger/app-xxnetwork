@@ -1,4 +1,4 @@
-# Elixxir  1.200.x
+# xx network  1.200.x
 
 ## System
 

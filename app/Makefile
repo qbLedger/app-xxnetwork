@@ -75,13 +75,13 @@ DEFINES += APP_STANDARD
 ifeq ($(TARGET_NAME),TARGET_NANOX)
 DEFINES += SUBSTRATE_PARSER_FULL
 endif
-APPNAME = "Elixxir"
+APPNAME = "xx network"
 APPPATH = "44'/1955'"
 
 else ifeq ($(COIN),XX_XL)
 # XL app configuration
 DEFINES += APP_STANDARD SUBSTRATE_PARSER_FULL
-APPNAME = "Elixxir XL"
+APPNAME = "xx network XL"
 APPPATH = "44'/1955'"
 
 else

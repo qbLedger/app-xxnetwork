@@ -58,15 +58,15 @@ typedef enum {
 #define COIN_AMOUNT_DECIMAL_PLACES 9
 
 #define COIN_GENESIS_HASH "50dd5d206917bf10502c68fb4d18a59fc8aa31586f4e8856b493e43544aa82aa"
-#define COIN_NAME "Elixxir"
+#define COIN_NAME "xx network"
 #define COIN_TICKER "xx "
 
 #define COIN_SECRET_REQUIRED_CLICKS 0
 
-#define MENU_MAIN_APP_LINE1 "Elixxir"
+#define MENU_MAIN_APP_LINE1 "xx network"
 #define MENU_MAIN_APP_LINE2 "Ready"
 #define MENU_MAIN_APP_LINE2_SECRET "xx RECOVERY"
-#define APPVERSION_LINE1 "Elixxir"
+#define APPVERSION_LINE1 "xx network"
 #define APPVERSION_LINE2 "v" APPVERSION
 
 #ifdef __cplusplus
