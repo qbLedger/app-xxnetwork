@@ -1,4 +1,4 @@
-# Elixxir App
+# xx network App
 
 ## General structure
 

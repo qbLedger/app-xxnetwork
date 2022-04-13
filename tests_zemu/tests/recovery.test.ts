@@ -15,7 +15,7 @@
  ******************************************************************************* */
 
 import Zemu, { DEFAULT_START_OPTIONS } from '@zondax/zemu'
-import { newElixxirApp } from '@zondax/ledger-substrate'
+import { newXXNetworkApp } from '@zondax/ledger-substrate'
 import { APP_SEED, models } from './common'
 
 const defaultOptions = {
@@ -61,17 +61,17 @@ describe('Standard', function () {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
-      const app = newElixxirApp(sim.getTransport())
+      const app = newXXNetworkApp(sim.getTransport())
 
-      const elixxir_expected_address = '6VyMPt81px3X3ESyQwCjetyPS62ttyJm22fGAnWNkADLbPP2'
-      const elixxir_expected_pk = '1dcca27d1ceeb141bd783eda1fa49b72eb5868c5e3bbd56021a1734000f5bd59'
+      const xxnetwork_expected_address = '6VyMPt81px3X3ESyQwCjetyPS62ttyJm22fGAnWNkADLbPP2'
+      const xxnetwork_expected_pk = '1dcca27d1ceeb141bd783eda1fa49b72eb5868c5e3bbd56021a1734000f5bd59'
       const polkadot_expected_address = '6aQDiGgb1KMdBLr8pwyHPrJsUCsmaYfUre1L5u94dr5oWSNT'
       const polkadot_expected_pk = 'e1b4d72d27b3e91b9b6116555b4ea17138ddc12ca7cdbab30e2e0509bd848419'
 
       let resp = await app.getAddress(0x80000000, 0x80000000, 0x80000000)
       console.log(resp)
-      expect(resp.address).toEqual(elixxir_expected_address)
-      expect(resp.pubKey).toEqual(elixxir_expected_pk)
+      expect(resp.address).toEqual(xxnetwork_expected_address)
+      expect(resp.pubKey).toEqual(xxnetwork_expected_pk)
 
       await activateSecretMode(sim)
 

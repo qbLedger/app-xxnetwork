@@ -290,6 +290,7 @@ static const char* STR_ME_CLEAR_CLASS_METADATA = "Clear class metadata";
 static const char* STR_ME_SET_CMIX_ID = "Set cmix id";
 static const char* STR_ME_SET_VESTING = "Set vesting";
 static const char* STR_ME_ADMIN_SET_VESTING = "Admin set vesting";
+static const char* STR_ME_TRANSFER_CMIX_ID = "Transfer cmix id";
 
 // Items names
 static const char* STR_IT_ratio = "Ratio";

@@ -27,7 +27,9 @@ extern "C" {
 
 // Read functions
 parser_error_t _readAccountId_V1(parser_context_t* c, pd_AccountId_V1_t* v);
-parser_error_t _readAccountVoteBalanceOf_V1(parser_context_t* c, pd_AccountVoteBalanceOf_V1_t* v);
+parser_error_t _readAccountVoteSplit_V1(parser_context_t* c, pd_AccountVoteSplit_V1_t* v);
+parser_error_t _readAccountVoteStandard_V1(parser_context_t* c, pd_AccountVoteStandard_V1_t* v);
+parser_error_t _readAccountVote_V1(parser_context_t* c, pd_AccountVote_V1_t* v);
 parser_error_t _readAuthorityIdasRuntimeAppPublicSignature_V1(parser_context_t* c, pd_AuthorityIdasRuntimeAppPublicSignature_V1_t* v);
 parser_error_t _readBoundedVecu8KeyLimit_V1(parser_context_t* c, pd_BoundedVecu8KeyLimit_V1_t* v);
 parser_error_t _readBoundedVecu8StringLimit_V1(parser_context_t* c, pd_BoundedVecu8StringLimit_V1_t* v);
@@ -98,9 +100,9 @@ parser_error_t _readVecTransferDataAccountIdBalanceOfTBlockNumber_V1(parser_cont
 parser_error_t _readVecTupleAccountIdData_V1(parser_context_t* c, pd_VecTupleAccountIdData_V1_t* v);
 parser_error_t _readVecTupleAccountIdu32_V1(parser_context_t* c, pd_VecTupleAccountIdu32_V1_t* v);
 parser_error_t _readVecTupleBalanceOfTBalanceOfTBlockNumber_V1(parser_context_t* c, pd_VecTupleBalanceOfTBalanceOfTBlockNumber_V1_t* v);
-parser_error_t _readVecVestingInfoBalanceOfTBlockNumber_V1(parser_context_t* c, pd_VecVestingInfoBalanceOfTBlockNumber_V1_t* v);
 parser_error_t _readVecinflationIdealInterestPointBlockNumber_V1(parser_context_t* c, pd_VecinflationIdealInterestPointBlockNumber_V1_t* v);
 parser_error_t _readVestingInfoBalanceOfTBlockNumber_V1(parser_context_t* c, pd_VestingInfoBalanceOfTBlockNumber_V1_t* v);
+parser_error_t _readVote_V1(parser_context_t* c, pd_Vote_V1_t* v);
 parser_error_t _readWeight_V1(parser_context_t* c, pd_Weight_V1_t* v);
 parser_error_t _readchainbridgeChainId_V1(parser_context_t* c, pd_chainbridgeChainId_V1_t* v);
 parser_error_t _readcmixSoftwareHashesHash_V1(parser_context_t* c, pd_cmixSoftwareHashesHash_V1_t* v);
@@ -118,8 +120,22 @@ parser_error_t _toStringAccountId_V1(
     uint8_t pageIdx,
     uint8_t* pageCount);
 
-parser_error_t _toStringAccountVoteBalanceOf_V1(
-    const pd_AccountVoteBalanceOf_V1_t* v,
+parser_error_t _toStringAccountVoteSplit_V1(
+    const pd_AccountVoteSplit_V1_t* v,
+    char* outValue,
+    uint16_t outValueLen,
+    uint8_t pageIdx,
+    uint8_t* pageCount);
+
+parser_error_t _toStringAccountVoteStandard_V1(
+    const pd_AccountVoteStandard_V1_t* v,
+    char* outValue,
+    uint16_t outValueLen,
+    uint8_t pageIdx,
+    uint8_t* pageCount);
+
+parser_error_t _toStringAccountVote_V1(
+    const pd_AccountVote_V1_t* v,
     char* outValue,
     uint16_t outValueLen,
     uint8_t pageIdx,
@@ -615,13 +631,6 @@ parser_error_t _toStringVecTupleBalanceOfTBalanceOfTBlockNumber_V1(
     uint8_t pageIdx,
     uint8_t* pageCount);
 
-parser_error_t _toStringVecVestingInfoBalanceOfTBlockNumber_V1(
-    const pd_VecVestingInfoBalanceOfTBlockNumber_V1_t* v,
-    char* outValue,
-    uint16_t outValueLen,
-    uint8_t pageIdx,
-    uint8_t* pageCount);
-
 parser_error_t _toStringVecinflationIdealInterestPointBlockNumber_V1(
     const pd_VecinflationIdealInterestPointBlockNumber_V1_t* v,
     char* outValue,
@@ -631,6 +640,13 @@ parser_error_t _toStringVecinflationIdealInterestPointBlockNumber_V1(
 
 parser_error_t _toStringVestingInfoBalanceOfTBlockNumber_V1(
     const pd_VestingInfoBalanceOfTBlockNumber_V1_t* v,
+    char* outValue,
+    uint16_t outValueLen,
+    uint8_t pageIdx,
+    uint8_t* pageCount);
+
+parser_error_t _toStringVote_V1(
+    const pd_Vote_V1_t* v,
     char* outValue,
     uint16_t outValueLen,
     uint8_t pageIdx,
