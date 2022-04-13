@@ -40,6 +40,20 @@ typedef struct {
 } pd_TupleBalanceOfTBalanceOfTBlockNumber_V1_t;
 
 typedef struct {
+    uint8_t value;
+} pd_Vote_V1_t;
+
+typedef struct {
+    pd_BalanceOf_t aye;
+    pd_BalanceOf_t nay;
+} pd_AccountVoteSplit_V1_t;
+
+typedef struct {
+    pd_Vote_V1_t vote;
+    pd_BalanceOf_t balance;
+} pd_AccountVoteStandard_V1_t;
+
+typedef struct {
     compactInt_t value;
 } pd_CompactPerBill_V1_t;
 
@@ -117,17 +131,20 @@ typedef struct {
 typedef struct {
     // TODO: Not implemented
     uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
-} pd_VestingInfoBalanceOfTBlockNumber_V1_t;
-
-typedef struct {
-    // TODO: Not implemented
-    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
 } pd_inflationIdealInterestPointBlockNumber_V1_t;
 
 typedef struct {
     // TODO: Not implemented
     uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
 } pd_schedulePeriodBlockNumber_V1_t;
+
+typedef struct {
+    uint8_t value;
+    union {
+        pd_AccountVoteStandard_V1_t voteStandard;
+        pd_AccountVoteSplit_V1_t voteSplit;
+    };
+} pd_AccountVote_V1_t;
 
 typedef struct {
     pd_Compactu32_t accounts;
@@ -165,11 +182,6 @@ typedef struct {
     const uint8_t* _ptr;
     uint64_t _lenBuffer;
 } pd_VecTupleAccountIdu32_V1_t;
-
-typedef struct {
-    // TODO: Not implemented
-    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
-} pd_AccountVoteBalanceOf_V1_t;
 
 typedef struct {
     // TODO: Not implemented
@@ -402,13 +414,12 @@ typedef struct {
     uint64_t _len;
     const uint8_t* _ptr;
     uint64_t _lenBuffer;
-} pd_VecVestingInfoBalanceOfTBlockNumber_V1_t;
+} pd_VecinflationIdealInterestPointBlockNumber_V1_t;
 
 typedef struct {
-    uint64_t _len;
-    const uint8_t* _ptr;
-    uint64_t _lenBuffer;
-} pd_VecinflationIdealInterestPointBlockNumber_V1_t;
+    // TODO: Not implemented
+    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
+} pd_VestingInfoBalanceOfTBlockNumber_V1_t;
 
 typedef struct {
     uint64_t value;

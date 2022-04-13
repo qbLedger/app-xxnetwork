@@ -203,6 +203,11 @@ typedef struct {
     pd_Hash_t cmix_id;
 } pd_staking_set_cmix_id_V1_t;
 
+#define PD_CALL_STAKING_TRANSFER_CMIX_ID_V1 25
+typedef struct {
+    pd_AccountId_V1_t dest;
+} pd_staking_transfer_cmix_id_V1_t;
+
 #define PD_CALL_GRANDPA_NOTE_STALLED_V1 2
 typedef struct {
     pd_BlockNumber_t delay;
@@ -1009,6 +1014,7 @@ typedef union {
     pd_staking_kick_V1_t staking_kick_V1;
     pd_staking_chill_other_V1_t staking_chill_other_V1;
     pd_staking_set_cmix_id_V1_t staking_set_cmix_id_V1;
+    pd_staking_transfer_cmix_id_V1_t staking_transfer_cmix_id_V1;
     pd_grandpa_note_stalled_V1_t grandpa_note_stalled_V1;
     pd_council_set_members_V1_t council_set_members_V1;
     pd_council_vote_V1_t council_vote_V1;
