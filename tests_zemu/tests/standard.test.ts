@@ -15,7 +15,7 @@
  ******************************************************************************* */
 
 import Zemu, {DEFAULT_START_OPTIONS} from '@zondax/zemu'
-import {newElixxirApp} from '@zondax/ledger-substrate'
+import {newXXNetworkApp} from '@zondax/ledger-substrate'
 import {APP_SEED, models} from './common'
 
 // @ts-ignore
@@ -64,7 +64,7 @@ describe('Standard', function () {
     const sim = new Zemu(m.path)
     try {
       await sim.start({...defaultOptions, model: m.name})
-      const app = newElixxirApp(sim.getTransport())
+      const app = newXXNetworkApp(sim.getTransport())
       const resp = await app.getVersion()
 
       console.log(resp)
@@ -84,7 +84,7 @@ describe('Standard', function () {
     const sim = new Zemu(m.path)
     try {
       await sim.start({...defaultOptions, model: m.name})
-      const app = newElixxirApp(sim.getTransport())
+      const app = newXXNetworkApp(sim.getTransport())
 
       const resp = await app.getAddress(0x80000000, 0x80000000, 0x80000000)
 
@@ -104,7 +104,7 @@ describe('Standard', function () {
     const sim = new Zemu(m.path)
     try {
       await sim.start({...defaultOptions, model: m.name})
-      const app = newElixxirApp(sim.getTransport())
+      const app = newXXNetworkApp(sim.getTransport())
 
       const respRequest = app.getAddress(0x80000000, 0x80000000, 0x80000000, true)
       // Wait until we are not in the main menu
@@ -129,7 +129,7 @@ describe('Standard', function () {
     const sim = new Zemu(m.path)
     try {
       await sim.start({...defaultOptions, model: m.name})
-      const app = newElixxirApp(sim.getTransport())
+      const app = newXXNetworkApp(sim.getTransport())
 
       const respRequest = app.getAddress(0x80000000, 0x80000000, 0x80000000, true)
       // Wait until we are not in the main menu
@@ -150,7 +150,7 @@ describe('Standard', function () {
     const sim = new Zemu(m.path)
     try {
       await sim.start({...defaultOptions, model: m.name})
-      const app = newElixxirApp(sim.getTransport())
+      const app = newXXNetworkApp(sim.getTransport())
       const pathAccount = 0x80000000
       const pathChange = 0x80000000
       const pathIndex = 0x80000000
@@ -190,7 +190,7 @@ describe('Standard', function () {
     const sim = new Zemu(m.path)
     try {
       await sim.start({...defaultOptions, model: m.name})
-      const app = newElixxirApp(sim.getTransport())
+      const app = newXXNetworkApp(sim.getTransport())
       const pathAccount = 0x80000000
       const pathChange = 0x80000000
       const pathIndex = 0x80000000
@@ -236,7 +236,7 @@ describe('Standard', function () {
     const sim = new Zemu(m.path)
     try {
       await sim.start({...defaultOptions, model: m.name})
-      const app = newElixxirApp(sim.getTransport())
+      const app = newXXNetworkApp(sim.getTransport())
       const pathAccount = 0x80000000
       const pathChange = 0x80000000
       const pathIndex = 0x80000000
@@ -276,7 +276,7 @@ describe('Standard', function () {
     const sim = new Zemu(m.path)
     try {
       await sim.start({...defaultOptions, model: m.name})
-      const app = newElixxirApp(sim.getTransport())
+      const app = newXXNetworkApp(sim.getTransport())
       const pathAccount = 0x80000000
       const pathChange = 0x80000000
       const pathIndex = 0x80000000

@@ -23,7 +23,7 @@ extern "C" {
 
 #define HDPATH_LEN_DEFAULT   5
 #define HDPATH_0_DEFAULT     (0x80000000 | 0x2c)
-#define HDPATH_1_DEFAULT     (0x80000000 | 0x7a3)       // 1955 - Elixxir
+#define HDPATH_1_DEFAULT     (0x80000000 | 0x7a3)       // 1955 - xx network
 #define HDPATH_1_RECOVERY    (0x80000000 | 0x162)       // 354 - Polkadot
 
 #define SK_LEN_25519         64u
@@ -53,7 +53,7 @@ typedef enum {
 #define COIN_AMOUNT_DECIMAL_PLACES          9
 
 #define COIN_GENESIS_HASH                   "50dd5d206917bf10502c68fb4d18a59fc8aa31586f4e8856b493e43544aa82aa"
-#define COIN_NAME                           "Elixxir"
+#define COIN_NAME                           "xx network"
 #define COIN_TICKER                         "xx "
 
 #define COIN_SECRET_REQUIRED_CLICKS         10

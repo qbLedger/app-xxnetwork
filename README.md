@@ -1,7 +1,7 @@
-# Ledger Elixxir App
+# Ledger xx network App
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![GithubActions](https://github.com/zondax/ledger-elixxir/actions/workflows/main.yml/badge.svg)](https://github.com/Zondax/ledger-elixxir/blob/main/.github/workflows/main.yaml)
+[![GithubActions](https://github.com/zondax/ledger-xxnetwork/actions/workflows/main.yml/badge.svg)](https://github.com/Zondax/ledger-xxnetwork/blob/main/.github/workflows/main.yaml)
 
 ---
 
@@ -12,7 +12,7 @@ _Please visit our website at [zondax.ch](https://www.zondax.ch)_
 
 ---
 
-This project contains the Elixxir app (https://xx.network/) for Ledger Nano S and X.
+This project contains the xx network app (https://xx.network/) for Ledger Nano S and X.
 
 - Ledger Nano S/X BOLOS app
 - Specs / Documentation
@@ -28,7 +28,7 @@ Please:
 - **Do not use in production**
 - **Do not use a Ledger device with funds for development purposes.**
 - **Have a separate and marked device that is used ONLY for development and testing**
-# Elixxir  1.201.x
+# xx network  1.201.x
 
 ## System
 

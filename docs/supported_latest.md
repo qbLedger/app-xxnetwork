@@ -1,4 +1,4 @@
-# Elixxir  1.201.x
+# xx network  1.201.x
 
 ## System
 
