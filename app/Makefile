@@ -75,7 +75,7 @@ DEFINES += APP_STANDARD
 ifneq ($(TARGET_NAME),TARGET_NANOS)
 DEFINES += SUBSTRATE_PARSER_FULL
 endif
-APPNAME = "xx network"
+APPNAME = "xx_network"
 APPPATH = "44'/1955'"
 
 else ifeq ($(COIN),XX_XL)
@@ -86,13 +86,13 @@ APPPATH = "44'/1955'"
 
 else
 define error_message
-
-
 COIN value not supported: [$(COIN)]
-
-
 endef
 $(error "$(error_message)")
+endif
+
+ifneq (1,$(words [$(APPNAME)]))
+$(error APPNAME must not contain spaces)
 endif
 
 APP_LOAD_PARAMS = --curve ed25519 --delete $(COMMON_LOAD_PARAMS) --path $(APPPATH)
