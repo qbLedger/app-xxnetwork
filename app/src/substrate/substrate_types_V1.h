@@ -63,8 +63,7 @@ typedef struct {
 } pd_ElectionScore_V1_t;
 
 typedef struct {
-    // TODO: Not implemented
-    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
+    uint32_t value;
 } pd_InstanceId_V1_t;
 
 typedef struct {
@@ -184,24 +183,21 @@ typedef struct {
 } pd_VecTupleAccountIdu32_V1_t;
 
 typedef struct {
+    pd_BalanceOf_t locked;
+    pd_BalanceOf_t per_block;
+    pd_BlockNumber_t starting_block;
+} pd_VestingInfo_V1_t;
+
+typedef struct {
     // TODO: Not implemented
     uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
 } pd_AuthorityIdasRuntimeAppPublicSignature_V1_t;
 
 typedef struct {
-    // TODO: Not implemented
-    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
-} pd_BoundedVecu8KeyLimit_V1_t;
-
-typedef struct {
-    // TODO: Not implemented
-    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
-} pd_BoundedVecu8StringLimit_V1_t;
-
-typedef struct {
-    // TODO: Not implemented
-    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
-} pd_BoundedVecu8ValueLimit_V1_t;
+    uint64_t _len;
+    uint64_t _lenBuffer;
+    const uint8_t* _ptr;
+} pd_BoundedVecu8_V1_t;
 
 typedef struct {
     // TODO: Not implemented
@@ -227,11 +223,6 @@ typedef struct {
     // TODO: Not implemented
     uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
 } pd_BoxRawSolutionSolutionOfT_V1_t;
-
-typedef struct {
-    // TODO: Not implemented
-    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
-} pd_BoxTasConfigIProposal_V1_t;
 
 typedef struct {
     // TODO: Not implemented
@@ -415,11 +406,6 @@ typedef struct {
     const uint8_t* _ptr;
     uint64_t _lenBuffer;
 } pd_VecinflationIdealInterestPointBlockNumber_V1_t;
-
-typedef struct {
-    // TODO: Not implemented
-    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
-} pd_VestingInfoBalanceOfTBlockNumber_V1_t;
 
 typedef struct {
     uint64_t value;

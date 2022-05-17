@@ -124,6 +124,16 @@ typedef struct {
 typedef struct {
 } pd_session_purge_keys_V1_t;
 
+#define PD_CALL_UTILITY_BATCH_V1 0
+typedef struct {
+    pd_VecCall_t calls;
+} pd_utility_batch_V1_t;
+
+#define PD_CALL_UTILITY_BATCH_ALL_V1 2
+typedef struct {
+    pd_VecCall_t calls;
+} pd_utility_batch_all_V1_t;
+
 #ifdef SUBSTRATE_PARSER_FULL
 
 #define PD_CALL_TIMESTAMP_SET_V1 0
@@ -385,16 +395,6 @@ typedef struct {
     pd_u32_t schedule1_index;
     pd_u32_t schedule2_index;
 } pd_vesting_merge_schedules_V1_t;
-
-#define PD_CALL_UTILITY_BATCH_V1 0
-typedef struct {
-    pd_VecCall_t calls;
-} pd_utility_batch_V1_t;
-
-#define PD_CALL_UTILITY_BATCH_ALL_V1 2
-typedef struct {
-    pd_VecCall_t calls;
-} pd_utility_batch_all_V1_t;
 
 #define PD_CALL_IDENTITY_ADD_REGISTRAR_V1 0
 typedef struct {
@@ -998,6 +998,8 @@ typedef union {
     pd_staking_rebond_V1_t staking_rebond_V1;
     pd_session_set_keys_V1_t session_set_keys_V1;
     pd_session_purge_keys_V1_t session_purge_keys_V1;
+    pd_utility_batch_V1_t utility_batch_V1;
+    pd_utility_batch_all_V1_t utility_batch_all_V1;
 #ifdef SUBSTRATE_PARSER_FULL
     pd_timestamp_set_V1_t timestamp_set_V1;
     pd_balances_force_unreserve_V1_t balances_force_unreserve_V1;
@@ -1046,8 +1048,6 @@ typedef union {
     pd_vesting_vest_V1_t vesting_vest_V1;
     pd_vesting_vest_other_V1_t vesting_vest_other_V1;
     pd_vesting_merge_schedules_V1_t vesting_merge_schedules_V1;
-    pd_utility_batch_V1_t utility_batch_V1;
-    pd_utility_batch_all_V1_t utility_batch_all_V1;
     pd_identity_add_registrar_V1_t identity_add_registrar_V1;
     pd_identity_clear_identity_V1_t identity_clear_identity_V1;
     pd_identity_request_judgement_V1_t identity_request_judgement_V1;

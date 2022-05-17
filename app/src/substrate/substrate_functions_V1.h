@@ -31,15 +31,12 @@ parser_error_t _readAccountVoteSplit_V1(parser_context_t* c, pd_AccountVoteSplit
 parser_error_t _readAccountVoteStandard_V1(parser_context_t* c, pd_AccountVoteStandard_V1_t* v);
 parser_error_t _readAccountVote_V1(parser_context_t* c, pd_AccountVote_V1_t* v);
 parser_error_t _readAuthorityIdasRuntimeAppPublicSignature_V1(parser_context_t* c, pd_AuthorityIdasRuntimeAppPublicSignature_V1_t* v);
-parser_error_t _readBoundedVecu8KeyLimit_V1(parser_context_t* c, pd_BoundedVecu8KeyLimit_V1_t* v);
-parser_error_t _readBoundedVecu8StringLimit_V1(parser_context_t* c, pd_BoundedVecu8StringLimit_V1_t* v);
-parser_error_t _readBoundedVecu8ValueLimit_V1(parser_context_t* c, pd_BoundedVecu8ValueLimit_V1_t* v);
+parser_error_t _readBoundedVecu8_V1(parser_context_t* c, pd_BoundedVecu8_V1_t* v);
 parser_error_t _readBoxEquivocationProofHashBlockNumber_V1(parser_context_t* c, pd_BoxEquivocationProofHashBlockNumber_V1_t* v);
 parser_error_t _readBoxEquivocationProofHeader_V1(parser_context_t* c, pd_BoxEquivocationProofHeader_V1_t* v);
 parser_error_t _readBoxIdentityInfoMaxAdditionalFields_V1(parser_context_t* c, pd_BoxIdentityInfoMaxAdditionalFields_V1_t* v);
 parser_error_t _readBoxPalletsOrigin_V1(parser_context_t* c, pd_BoxPalletsOrigin_V1_t* v);
 parser_error_t _readBoxRawSolutionSolutionOfT_V1(parser_context_t* c, pd_BoxRawSolutionSolutionOfT_V1_t* v);
-parser_error_t _readBoxTasConfigIProposal_V1(parser_context_t* c, pd_BoxTasConfigIProposal_V1_t* v);
 parser_error_t _readBoxTasConfigProposal_V1(parser_context_t* c, pd_BoxTasConfigProposal_V1_t* v);
 parser_error_t _readCallHashOf_V1(parser_context_t* c, pd_CallHashOf_V1_t* v);
 parser_error_t _readChainId_V1(parser_context_t* c, pd_ChainId_V1_t* v);
@@ -101,7 +98,7 @@ parser_error_t _readVecTupleAccountIdData_V1(parser_context_t* c, pd_VecTupleAcc
 parser_error_t _readVecTupleAccountIdu32_V1(parser_context_t* c, pd_VecTupleAccountIdu32_V1_t* v);
 parser_error_t _readVecTupleBalanceOfTBalanceOfTBlockNumber_V1(parser_context_t* c, pd_VecTupleBalanceOfTBalanceOfTBlockNumber_V1_t* v);
 parser_error_t _readVecinflationIdealInterestPointBlockNumber_V1(parser_context_t* c, pd_VecinflationIdealInterestPointBlockNumber_V1_t* v);
-parser_error_t _readVestingInfoBalanceOfTBlockNumber_V1(parser_context_t* c, pd_VestingInfoBalanceOfTBlockNumber_V1_t* v);
+parser_error_t _readVestingInfo_V1(parser_context_t* c, pd_VestingInfo_V1_t* v);
 parser_error_t _readVote_V1(parser_context_t* c, pd_Vote_V1_t* v);
 parser_error_t _readWeight_V1(parser_context_t* c, pd_Weight_V1_t* v);
 parser_error_t _readchainbridgeChainId_V1(parser_context_t* c, pd_chainbridgeChainId_V1_t* v);
@@ -148,22 +145,8 @@ parser_error_t _toStringAuthorityIdasRuntimeAppPublicSignature_V1(
     uint8_t pageIdx,
     uint8_t* pageCount);
 
-parser_error_t _toStringBoundedVecu8KeyLimit_V1(
-    const pd_BoundedVecu8KeyLimit_V1_t* v,
-    char* outValue,
-    uint16_t outValueLen,
-    uint8_t pageIdx,
-    uint8_t* pageCount);
-
-parser_error_t _toStringBoundedVecu8StringLimit_V1(
-    const pd_BoundedVecu8StringLimit_V1_t* v,
-    char* outValue,
-    uint16_t outValueLen,
-    uint8_t pageIdx,
-    uint8_t* pageCount);
-
-parser_error_t _toStringBoundedVecu8ValueLimit_V1(
-    const pd_BoundedVecu8ValueLimit_V1_t* v,
+parser_error_t _toStringBoundedVecu8_V1(
+    const pd_BoundedVecu8_V1_t* v,
     char* outValue,
     uint16_t outValueLen,
     uint8_t pageIdx,
@@ -199,13 +182,6 @@ parser_error_t _toStringBoxPalletsOrigin_V1(
 
 parser_error_t _toStringBoxRawSolutionSolutionOfT_V1(
     const pd_BoxRawSolutionSolutionOfT_V1_t* v,
-    char* outValue,
-    uint16_t outValueLen,
-    uint8_t pageIdx,
-    uint8_t* pageCount);
-
-parser_error_t _toStringBoxTasConfigIProposal_V1(
-    const pd_BoxTasConfigIProposal_V1_t* v,
     char* outValue,
     uint16_t outValueLen,
     uint8_t pageIdx,
@@ -638,8 +614,8 @@ parser_error_t _toStringVecinflationIdealInterestPointBlockNumber_V1(
     uint8_t pageIdx,
     uint8_t* pageCount);
 
-parser_error_t _toStringVestingInfoBalanceOfTBlockNumber_V1(
-    const pd_VestingInfoBalanceOfTBlockNumber_V1_t* v,
+parser_error_t _toStringVestingInfo_V1(
+    const pd_VestingInfo_V1_t* v,
     char* outValue,
     uint16_t outValueLen,
     uint8_t pageIdx,
