@@ -138,6 +138,20 @@ __Z_INLINE parser_error_t _readMethod_session_purge_keys_V1(
     return parser_ok;
 }
 
+__Z_INLINE parser_error_t _readMethod_utility_batch_V1(
+    parser_context_t* c, pd_utility_batch_V1_t* m)
+{
+    CHECK_ERROR(_readVecCall(c, &m->calls))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_utility_batch_all_V1(
+    parser_context_t* c, pd_utility_batch_all_V1_t* m)
+{
+    CHECK_ERROR(_readVecCall(c, &m->calls))
+    return parser_ok;
+}
+
 #ifdef SUBSTRATE_PARSER_FULL
 __Z_INLINE parser_error_t _readMethod_system_fill_block_V1(
     parser_context_t* c, pd_system_fill_block_V1_t* m)
@@ -541,20 +555,6 @@ __Z_INLINE parser_error_t _readMethod_vesting_merge_schedules_V1(
 {
     CHECK_ERROR(_readu32(c, &m->schedule1_index))
     CHECK_ERROR(_readu32(c, &m->schedule2_index))
-    return parser_ok;
-}
-
-__Z_INLINE parser_error_t _readMethod_utility_batch_V1(
-    parser_context_t* c, pd_utility_batch_V1_t* m)
-{
-    CHECK_ERROR(_readVecCall(c, &m->calls))
-    return parser_ok;
-}
-
-__Z_INLINE parser_error_t _readMethod_utility_batch_all_V1(
-    parser_context_t* c, pd_utility_batch_all_V1_t* m)
-{
-    CHECK_ERROR(_readVecCall(c, &m->calls))
     return parser_ok;
 }
 
@@ -1450,6 +1450,12 @@ parser_error_t _readMethod_V1(
     case 2305: /* module 9 call 1 */
         CHECK_ERROR(_readMethod_session_purge_keys_V1(c, &method->basic.session_purge_keys_V1))
         break;
+    case 5376: /* module 21 call 0 */
+        CHECK_ERROR(_readMethod_utility_batch_V1(c, &method->basic.utility_batch_V1))
+        break;
+    case 5378: /* module 21 call 2 */
+        CHECK_ERROR(_readMethod_utility_batch_all_V1(c, &method->basic.utility_batch_all_V1))
+        break;
 
 #ifdef SUBSTRATE_PARSER_FULL
     case 0: /* module 0 call 0 */
@@ -1613,12 +1619,6 @@ parser_error_t _readMethod_V1(
         break;
     case 5124: /* module 20 call 4 */
         CHECK_ERROR(_readMethod_vesting_merge_schedules_V1(c, &method->basic.vesting_merge_schedules_V1))
-        break;
-    case 5376: /* module 21 call 0 */
-        CHECK_ERROR(_readMethod_utility_batch_V1(c, &method->basic.utility_batch_V1))
-        break;
-    case 5378: /* module 21 call 2 */
-        CHECK_ERROR(_readMethod_utility_batch_all_V1(c, &method->basic.utility_batch_all_V1))
         break;
     case 5632: /* module 22 call 0 */
         CHECK_ERROR(_readMethod_identity_add_registrar_V1(c, &method->basic.identity_add_registrar_V1))
@@ -1951,6 +1951,8 @@ const char* _getMethod_ModuleName_V1(uint8_t moduleIdx)
         return STR_MO_STAKING;
     case 9:
         return STR_MO_SESSION;
+    case 21:
+        return STR_MO_UTILITY;
 #ifdef SUBSTRATE_PARSER_FULL
     case 0:
         return STR_MO_SYSTEM;
@@ -1972,8 +1974,6 @@ const char* _getMethod_ModuleName_V1(uint8_t moduleIdx)
         return STR_MO_CLAIMS;
     case 20:
         return STR_MO_VESTING;
-    case 21:
-        return STR_MO_UTILITY;
     case 22:
         return STR_MO_IDENTITY;
     case 23:
@@ -2049,6 +2049,20 @@ const char* _getMethod_Name_V1(uint8_t moduleIdx, uint8_t callIdx)
         return STR_ME_SET_KEYS;
     case 2305: /* module 9 call 1 */
         return STR_ME_PURGE_KEYS;
+    case 5376: /* module 21 call 0 */
+        return STR_ME_BATCH;
+    case 5378: /* module 21 call 2 */
+        return STR_ME_BATCH_ALL;
+    default:
+        return _getMethod_Name_V1_ParserFull(callPrivIdx);
+    }
+
+    return NULL;
+}
+
+const char* _getMethod_Name_V1_ParserFull(uint16_t callPrivIdx)
+{
+    switch (callPrivIdx) {
 #ifdef SUBSTRATE_PARSER_FULL
     case 0: /* module 0 call 0 */
         return STR_ME_FILL_BLOCK;
@@ -2060,46 +2074,18 @@ const char* _getMethod_Name_V1(uint8_t moduleIdx, uint8_t callIdx)
         return STR_ME_SET_CODE;
     case 4: /* module 0 call 4 */
         return STR_ME_SET_CODE_WITHOUT_CHECKS;
-    case 5: /* module 0 call 5 */
-        return STR_ME_SET_STORAGE;
-    case 6: /* module 0 call 6 */
-        return STR_ME_KILL_STORAGE;
-    case 7: /* module 0 call 7 */
-        return STR_ME_KILL_PREFIX;
     case 8: /* module 0 call 8 */
         return STR_ME_REMARK_WITH_EVENT;
-    case 256: /* module 1 call 0 */
-        return STR_ME_SCHEDULE;
-    case 257: /* module 1 call 1 */
-        return STR_ME_CANCEL;
-    case 258: /* module 1 call 2 */
-        return STR_ME_SCHEDULE_NAMED;
-    case 259: /* module 1 call 3 */
-        return STR_ME_CANCEL_NAMED;
-    case 260: /* module 1 call 4 */
-        return STR_ME_SCHEDULE_AFTER;
-    case 261: /* module 1 call 5 */
-        return STR_ME_SCHEDULE_NAMED_AFTER;
-    case 512: /* module 2 call 0 */
-        return STR_ME_REPORT_EQUIVOCATION;
-    case 513: /* module 2 call 1 */
-        return STR_ME_REPORT_EQUIVOCATION_UNSIGNED;
-    case 514: /* module 2 call 2 */
-        return STR_ME_PLAN_CONFIG_CHANGE;
     case 768: /* module 3 call 0 */
         return STR_ME_SET;
     case 1025: /* module 4 call 1 */
         return STR_ME_SET_BALANCE;
     case 1029: /* module 4 call 5 */
         return STR_ME_FORCE_UNRESERVE;
-    case 1280: /* module 5 call 0 */
-        return STR_ME_SET_UNCLES;
     case 1544: /* module 6 call 8 */
         return STR_ME_SET_VALIDATOR_COUNT;
     case 1545: /* module 6 call 9 */
         return STR_ME_INCREASE_VALIDATOR_COUNT;
-    case 1546: /* module 6 call 10 */
-        return STR_ME_SCALE_VALIDATOR_COUNT;
     case 1547: /* module 6 call 11 */
         return STR_ME_FORCE_NO_ERAS;
     case 1548: /* module 6 call 12 */
@@ -2118,86 +2104,16 @@ const char* _getMethod_Name_V1(uint8_t moduleIdx, uint8_t callIdx)
         return STR_ME_REAP_STASH;
     case 1557: /* module 6 call 21 */
         return STR_ME_KICK;
-    case 1558: /* module 6 call 22 */
-        return STR_ME_SET_STAKING_LIMITS;
     case 1559: /* module 6 call 23 */
         return STR_ME_CHILL_OTHER;
     case 1560: /* module 6 call 24 */
         return STR_ME_SET_CMIX_ID;
     case 1561: /* module 6 call 25 */
         return STR_ME_TRANSFER_CMIX_ID;
-    case 1792: /* module 7 call 0 */
-        return STR_ME_SUBMIT_UNSIGNED;
-    case 1793: /* module 7 call 1 */
-        return STR_ME_SET_MINIMUM_UNTRUSTED_SCORE;
-    case 1794: /* module 7 call 2 */
-        return STR_ME_SET_EMERGENCY_ELECTION_RESULT;
-    case 1795: /* module 7 call 3 */
-        return STR_ME_SUBMIT;
-    case 2560: /* module 10 call 0 */
-        return STR_ME_REPORT_EQUIVOCATION;
-    case 2561: /* module 10 call 1 */
-        return STR_ME_REPORT_EQUIVOCATION_UNSIGNED;
     case 2562: /* module 10 call 2 */
         return STR_ME_NOTE_STALLED;
-    case 2816: /* module 11 call 0 */
-        return STR_ME_HEARTBEAT;
-    case 3328: /* module 13 call 0 */
-        return STR_ME_PROPOSE;
-    case 3329: /* module 13 call 1 */
-        return STR_ME_SECOND;
-    case 3330: /* module 13 call 2 */
-        return STR_ME_VOTE;
-    case 3331: /* module 13 call 3 */
-        return STR_ME_EMERGENCY_CANCEL;
-    case 3332: /* module 13 call 4 */
-        return STR_ME_EXTERNAL_PROPOSE;
-    case 3333: /* module 13 call 5 */
-        return STR_ME_EXTERNAL_PROPOSE_MAJORITY;
-    case 3334: /* module 13 call 6 */
-        return STR_ME_EXTERNAL_PROPOSE_DEFAULT;
-    case 3335: /* module 13 call 7 */
-        return STR_ME_FAST_TRACK;
-    case 3336: /* module 13 call 8 */
-        return STR_ME_VETO_EXTERNAL;
-    case 3337: /* module 13 call 9 */
-        return STR_ME_CANCEL_REFERENDUM;
-    case 3338: /* module 13 call 10 */
-        return STR_ME_CANCEL_QUEUED;
-    case 3339: /* module 13 call 11 */
-        return STR_ME_DELEGATE;
-    case 3340: /* module 13 call 12 */
-        return STR_ME_UNDELEGATE;
-    case 3341: /* module 13 call 13 */
-        return STR_ME_CLEAR_PUBLIC_PROPOSALS;
-    case 3342: /* module 13 call 14 */
-        return STR_ME_NOTE_PREIMAGE;
-    case 3343: /* module 13 call 15 */
-        return STR_ME_NOTE_PREIMAGE_OPERATIONAL;
-    case 3344: /* module 13 call 16 */
-        return STR_ME_NOTE_IMMINENT_PREIMAGE;
-    case 3345: /* module 13 call 17 */
-        return STR_ME_NOTE_IMMINENT_PREIMAGE_OPERATIONAL;
-    case 3346: /* module 13 call 18 */
-        return STR_ME_REAP_PREIMAGE;
-    case 3347: /* module 13 call 19 */
-        return STR_ME_UNLOCK;
-    case 3348: /* module 13 call 20 */
-        return STR_ME_REMOVE_VOTE;
-    case 3349: /* module 13 call 21 */
-        return STR_ME_REMOVE_OTHER_VOTE;
-    case 3350: /* module 13 call 22 */
-        return STR_ME_ENACT_PROPOSAL;
-    case 3351: /* module 13 call 23 */
-        return STR_ME_BLACKLIST;
-    case 3352: /* module 13 call 24 */
-        return STR_ME_CANCEL_PROPOSAL;
     case 3584: /* module 14 call 0 */
         return STR_ME_SET_MEMBERS;
-    case 3585: /* module 14 call 1 */
-        return STR_ME_EXECUTE;
-    case 3586: /* module 14 call 2 */
-        return STR_ME_PROPOSE;
     case 3587: /* module 14 call 3 */
         return STR_ME_VOTE;
     case 3588: /* module 14 call 4 */
@@ -2206,10 +2122,6 @@ const char* _getMethod_Name_V1(uint8_t moduleIdx, uint8_t callIdx)
         return STR_ME_DISAPPROVE_PROPOSAL;
     case 3840: /* module 15 call 0 */
         return STR_ME_SET_MEMBERS;
-    case 3841: /* module 15 call 1 */
-        return STR_ME_EXECUTE;
-    case 3842: /* module 15 call 2 */
-        return STR_ME_PROPOSE;
     case 3843: /* module 15 call 3 */
         return STR_ME_VOTE;
     case 3844: /* module 15 call 4 */
@@ -2222,8 +2134,6 @@ const char* _getMethod_Name_V1(uint8_t moduleIdx, uint8_t callIdx)
         return STR_ME_REMOVE_VOTER;
     case 4098: /* module 16 call 2 */
         return STR_ME_SUBMIT_CANDIDACY;
-    case 4099: /* module 16 call 3 */
-        return STR_ME_RENOUNCE_CANDIDACY;
     case 4100: /* module 16 call 4 */
         return STR_ME_REMOVE_MEMBER;
     case 4101: /* module 16 call 5 */
@@ -2250,8 +2160,6 @@ const char* _getMethod_Name_V1(uint8_t moduleIdx, uint8_t callIdx)
         return STR_ME_APPROVE_PROPOSAL;
     case 4864: /* module 19 call 0 */
         return STR_ME_CLAIM;
-    case 4865: /* module 19 call 1 */
-        return STR_ME_MINT_CLAIM;
     case 4866: /* module 19 call 2 */
         return STR_ME_CLAIM_ATTEST;
     case 4867: /* module 19 call 3 */
@@ -2262,26 +2170,10 @@ const char* _getMethod_Name_V1(uint8_t moduleIdx, uint8_t callIdx)
         return STR_ME_VEST;
     case 5121: /* module 20 call 1 */
         return STR_ME_VEST_OTHER;
-    case 5122: /* module 20 call 2 */
-        return STR_ME_VESTED_TRANSFER;
-    case 5123: /* module 20 call 3 */
-        return STR_ME_FORCE_VESTED_TRANSFER;
     case 5124: /* module 20 call 4 */
         return STR_ME_MERGE_SCHEDULES;
-    case 5376: /* module 21 call 0 */
-        return STR_ME_BATCH;
-    case 5377: /* module 21 call 1 */
-        return STR_ME_AS_DERIVATIVE;
-    case 5378: /* module 21 call 2 */
-        return STR_ME_BATCH_ALL;
-    case 5379: /* module 21 call 3 */
-        return STR_ME_DISPATCH_AS;
     case 5632: /* module 22 call 0 */
         return STR_ME_ADD_REGISTRAR;
-    case 5633: /* module 22 call 1 */
-        return STR_ME_SET_IDENTITY;
-    case 5634: /* module 22 call 2 */
-        return STR_ME_SET_SUBS;
     case 5635: /* module 22 call 3 */
         return STR_ME_CLEAR_IDENTITY;
     case 5636: /* module 22 call 4 */
@@ -2292,16 +2184,8 @@ const char* _getMethod_Name_V1(uint8_t moduleIdx, uint8_t callIdx)
         return STR_ME_SET_FEE;
     case 5639: /* module 22 call 7 */
         return STR_ME_SET_ACCOUNT_ID;
-    case 5640: /* module 22 call 8 */
-        return STR_ME_SET_FIELDS;
-    case 5641: /* module 22 call 9 */
-        return STR_ME_PROVIDE_JUDGEMENT;
     case 5642: /* module 22 call 10 */
         return STR_ME_KILL_IDENTITY;
-    case 5643: /* module 22 call 11 */
-        return STR_ME_ADD_SUB;
-    case 5644: /* module 22 call 12 */
-        return STR_ME_RENAME_SUB;
     case 5645: /* module 22 call 13 */
         return STR_ME_REMOVE_SUB;
     case 5646: /* module 22 call 14 */
@@ -2358,48 +2242,24 @@ const char* _getMethod_Name_V1(uint8_t moduleIdx, uint8_t callIdx)
         return STR_ME_SLASH_TIP;
     case 7168: /* module 28 call 0 */
         return STR_ME_SET_THRESHOLD;
-    case 7169: /* module 28 call 1 */
-        return STR_ME_SET_RESOURCE;
     case 7170: /* module 28 call 2 */
         return STR_ME_REMOVE_RESOURCE;
-    case 7171: /* module 28 call 3 */
-        return STR_ME_WHITELIST_CHAIN;
     case 7172: /* module 28 call 4 */
         return STR_ME_ADD_RELAYER;
     case 7173: /* module 28 call 5 */
         return STR_ME_REMOVE_RELAYER;
-    case 7174: /* module 28 call 6 */
-        return STR_ME_ACKNOWLEDGE_PROPOSAL;
-    case 7175: /* module 28 call 7 */
-        return STR_ME_REJECT_PROPOSAL;
-    case 7176: /* module 28 call 8 */
-        return STR_ME_EVAL_VOTE_STATE;
-    case 7424: /* module 29 call 0 */
-        return STR_ME_TRANSFER_NATIVE;
     case 7425: /* module 29 call 1 */
         return STR_ME_TRANSFER;
     case 7426: /* module 29 call 2 */
         return STR_ME_SET_SWAP_FEE;
     case 7427: /* module 29 call 3 */
         return STR_ME_SET_FEE_DESTINATION;
-    case 7680: /* module 30 call 0 */
-        return STR_ME_SET_CMIX_HASHES;
     case 7681: /* module 30 call 1 */
         return STR_ME_SET_SCHEDULING_ACCOUNT;
-    case 7682: /* module 30 call 2 */
-        return STR_ME_SET_NEXT_CMIX_VARIABLES;
-    case 7683: /* module 30 call 3 */
-        return STR_ME_SUBMIT_CMIX_POINTS;
-    case 7684: /* module 30 call 4 */
-        return STR_ME_SUBMIT_CMIX_DEDUCTIONS;
     case 7685: /* module 30 call 5 */
         return STR_ME_SET_CMIX_ADDRESS_SPACE;
     case 7686: /* module 30 call 6 */
         return STR_ME_SET_ADMIN_PERMISSION;
-    case 7936: /* module 31 call 0 */
-        return STR_ME_SET_INFLATION_PARAMS;
-    case 7937: /* module 31 call 1 */
-        return STR_ME_SET_INTEREST_POINTS;
     case 7938: /* module 31 call 2 */
         return STR_ME_SET_LIQUIDITY_REWARDS_STAKE;
     case 7939: /* module 31 call 3 */
@@ -2422,18 +2282,10 @@ const char* _getMethod_Name_V1(uint8_t moduleIdx, uint8_t callIdx)
         return STR_ME_REMOVE_CUSTODIAN;
     case 8200: /* module 32 call 8 */
         return STR_ME_REPLACE_TEAM_MEMBER;
-    case 8448: /* module 33 call 0 */
-        return STR_ME_SELECT_OPTION;
     case 8449: /* module 33 call 1 */
         return STR_ME_APPROVE;
     case 8704: /* module 34 call 0 */
         return STR_ME_SET_TESTNET_MANAGER_ACCOUNT;
-    case 8705: /* module 34 call 1 */
-        return STR_ME_SET_SALE_MANAGER_ACCOUNT;
-    case 8706: /* module 34 call 2 */
-        return STR_ME_TESTNET_DISTRIBUTE;
-    case 8707: /* module 34 call 3 */
-        return STR_ME_SALE_DISTRIBUTE;
     case 8960: /* module 35 call 0 */
         return STR_ME_AS_MULTI_THRESHOLD_1;
     case 8961: /* module 35 call 1 */
@@ -2442,12 +2294,8 @@ const char* _getMethod_Name_V1(uint8_t moduleIdx, uint8_t callIdx)
         return STR_ME_APPROVE_AS_MULTI;
     case 8963: /* module 35 call 3 */
         return STR_ME_CANCEL_AS_MULTI;
-    case 9216: /* module 36 call 0 */
-        return STR_ME_AS_RECOVERED;
     case 9217: /* module 36 call 1 */
         return STR_ME_SET_RECOVERED;
-    case 9218: /* module 36 call 2 */
-        return STR_ME_CREATE_RECOVERY;
     case 9219: /* module 36 call 3 */
         return STR_ME_INITIATE_RECOVERY;
     case 9220: /* module 36 call 4 */
@@ -2460,12 +2308,8 @@ const char* _getMethod_Name_V1(uint8_t moduleIdx, uint8_t callIdx)
         return STR_ME_REMOVE_RECOVERY;
     case 9224: /* module 36 call 8 */
         return STR_ME_CANCEL_RECOVERED;
-    case 9472: /* module 37 call 0 */
-        return STR_ME_CREATE;
     case 9473: /* module 37 call 1 */
         return STR_ME_FORCE_CREATE;
-    case 9474: /* module 37 call 2 */
-        return STR_ME_DESTROY;
     case 9475: /* module 37 call 3 */
         return STR_ME_MINT;
     case 9476: /* module 37 call 4 */
@@ -2510,16 +2354,10 @@ const char* _getMethod_Name_V1(uint8_t moduleIdx, uint8_t callIdx)
         return STR_ME_CREATE;
     case 9729: /* module 38 call 1 */
         return STR_ME_FORCE_CREATE;
-    case 9730: /* module 38 call 2 */
-        return STR_ME_DESTROY;
     case 9731: /* module 38 call 3 */
         return STR_ME_MINT;
-    case 9732: /* module 38 call 4 */
-        return STR_ME_BURN;
     case 9733: /* module 38 call 5 */
         return STR_ME_TRANSFER;
-    case 9734: /* module 38 call 6 */
-        return STR_ME_REDEPOSIT;
     case 9735: /* module 38 call 7 */
         return STR_ME_FREEZE;
     case 9736: /* module 38 call 8 */
@@ -2534,20 +2372,10 @@ const char* _getMethod_Name_V1(uint8_t moduleIdx, uint8_t callIdx)
         return STR_ME_SET_TEAM;
     case 9741: /* module 38 call 13 */
         return STR_ME_APPROVE_TRANSFER;
-    case 9742: /* module 38 call 14 */
-        return STR_ME_CANCEL_APPROVAL;
     case 9743: /* module 38 call 15 */
         return STR_ME_FORCE_ASSET_STATUS;
-    case 9744: /* module 38 call 16 */
-        return STR_ME_SET_ATTRIBUTE;
-    case 9745: /* module 38 call 17 */
-        return STR_ME_CLEAR_ATTRIBUTE;
-    case 9746: /* module 38 call 18 */
-        return STR_ME_SET_METADATA;
     case 9747: /* module 38 call 19 */
         return STR_ME_CLEAR_METADATA;
-    case 9748: /* module 38 call 20 */
-        return STR_ME_SET_CLASS_METADATA;
     case 9749: /* module 38 call 21 */
         return STR_ME_CLEAR_CLASS_METADATA;
 #endif
@@ -2595,6 +2423,10 @@ uint8_t _getMethod_NumItems_V1(uint8_t moduleIdx, uint8_t callIdx)
         return 2;
     case 2305: /* module 9 call 1 */
         return 0;
+    case 5376: /* module 21 call 0 */
+        return 1;
+    case 5378: /* module 21 call 2 */
+        return 1;
 #ifdef SUBSTRATE_PARSER_FULL
     case 0: /* module 0 call 0 */
         return 1;
@@ -2704,10 +2536,6 @@ uint8_t _getMethod_NumItems_V1(uint8_t moduleIdx, uint8_t callIdx)
         return 1;
     case 5124: /* module 20 call 4 */
         return 2;
-    case 5376: /* module 21 call 0 */
-        return 1;
-    case 5378: /* module 21 call 2 */
-        return 1;
     case 5632: /* module 22 call 0 */
         return 1;
     case 5635: /* module 22 call 3 */
@@ -3050,6 +2878,20 @@ const char* _getMethod_ItemName_V1(uint8_t moduleIdx, uint8_t callIdx, uint8_t i
         }
     case 2305: /* module 9 call 1 */
         switch (itemIdx) {
+        default:
+            return NULL;
+        }
+    case 5376: /* module 21 call 0 */
+        switch (itemIdx) {
+        case 0:
+            return STR_IT_calls;
+        default:
+            return NULL;
+        }
+    case 5378: /* module 21 call 2 */
+        switch (itemIdx) {
+        case 0:
+            return STR_IT_calls;
         default:
             return NULL;
         }
@@ -3483,20 +3325,6 @@ const char* _getMethod_ItemName_V1(uint8_t moduleIdx, uint8_t callIdx, uint8_t i
             return STR_IT_schedule1_index;
         case 1:
             return STR_IT_schedule2_index;
-        default:
-            return NULL;
-        }
-    case 5376: /* module 21 call 0 */
-        switch (itemIdx) {
-        case 0:
-            return STR_IT_calls;
-        default:
-            return NULL;
-        }
-    case 5378: /* module 21 call 2 */
-        switch (itemIdx) {
-        case 0:
-            return STR_IT_calls;
         default:
             return NULL;
         }
@@ -4655,6 +4483,26 @@ parser_error_t _getMethod_ItemValue_V1(
         default:
             return parser_no_data;
         }
+    case 5376: /* module 21 call 0 */
+        switch (itemIdx) {
+        case 0: /* utility_batch_V1 - calls */;
+            return _toStringVecCall(
+                &m->basic.utility_batch_V1.calls,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        default:
+            return parser_no_data;
+        }
+    case 5378: /* module 21 call 2 */
+        switch (itemIdx) {
+        case 0: /* utility_batch_all_V1 - calls */;
+            return _toStringVecCall(
+                &m->basic.utility_batch_all_V1.calls,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        default:
+            return parser_no_data;
+        }
 #ifdef SUBSTRATE_PARSER_FULL
     case 0: /* module 0 call 0 */
         switch (itemIdx) {
@@ -5326,26 +5174,6 @@ parser_error_t _getMethod_ItemValue_V1(
         case 1: /* vesting_merge_schedules_V1 - schedule2_index */;
             return _toStringu32(
                 &m->basic.vesting_merge_schedules_V1.schedule2_index,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        default:
-            return parser_no_data;
-        }
-    case 5376: /* module 21 call 0 */
-        switch (itemIdx) {
-        case 0: /* utility_batch_V1 - calls */;
-            return _toStringVecCall(
-                &m->basic.utility_batch_V1.calls,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        default:
-            return parser_no_data;
-        }
-    case 5378: /* module 21 call 2 */
-        switch (itemIdx) {
-        case 0: /* utility_batch_all_V1 - calls */;
-            return _toStringVecCall(
-                &m->basic.utility_batch_all_V1.calls,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:

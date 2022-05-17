@@ -28,7 +28,7 @@ Please:
 - **Do not use in production**
 - **Do not use a Ledger device with funds for development purposes.**
 - **Have a separate and marked device that is used ONLY for development and testing**
-# xx network  1.202.x
+# xx network  1.203.x
 
 ## System
 
@@ -151,7 +151,7 @@ Please:
 
 | Name        | Light | XL | Nesting | Arguments |
 | :---------- |:------------:|:--------:|:--------:|:--------|
-|Propose |    |   |   | `Hash` proposal_hash <br/>`Compactu128` amount <br/> |
+|Propose |    |   |   | `Hash` proposal_hash <br/>`CompactBalance` amount <br/> |
 |Second |    |   |   | `Compactu32` proposal <br/>`Compactu32` seconds_upper_bound <br/> |
 |Vote |    |   |   | `Compactu32` ref_index <br/>`AccountVote` vote <br/> |
 |Emergency cancel |    |   |   | `ReferendumIndex` ref_index <br/> |
@@ -182,8 +182,8 @@ Please:
 | Name        | Light | XL | Nesting | Arguments |
 | :---------- |:------------:|:--------:|:--------:|:--------|
 |Set members |    | :heavy_check_mark: |   | `VecAccountId` new_members <br/>`OptionAccountId` prime <br/>`MemberCount` old_count <br/> |
-|Execute |    |   |   | `BoxTasConfigIProposal` proposal <br/>`Compactu32` length_bound <br/> |
-|Propose |    |   |   | `Compactu32` threshold <br/>`BoxTasConfigIProposal` proposal <br/>`Compactu32` length_bound <br/> |
+|Execute |    |   |   | `Proposal` proposal <br/>`Compactu32` length_bound <br/> |
+|Propose |    |   |   | `Compactu32` threshold <br/>`Proposal` proposal <br/>`Compactu32` length_bound <br/> |
 |Vote |    | :heavy_check_mark: |   | `Hash` proposal <br/>`Compactu32` index <br/>`bool` approve <br/> |
 |Close |    | :heavy_check_mark: |   | `Hash` proposal_hash <br/>`Compactu32` index <br/>`Compactu64` proposal_weight_bound <br/>`Compactu32` length_bound <br/> |
 |Disapprove proposal |    | :heavy_check_mark: |   | `Hash` proposal_hash <br/> |
@@ -193,8 +193,8 @@ Please:
 | Name        | Light | XL | Nesting | Arguments |
 | :---------- |:------------:|:--------:|:--------:|:--------|
 |Set members |    | :heavy_check_mark: |   | `VecAccountId` new_members <br/>`OptionAccountId` prime <br/>`MemberCount` old_count <br/> |
-|Execute |    |   |   | `BoxTasConfigIProposal` proposal <br/>`Compactu32` length_bound <br/> |
-|Propose |    |   |   | `Compactu32` threshold <br/>`BoxTasConfigIProposal` proposal <br/>`Compactu32` length_bound <br/> |
+|Execute |    |   |   | `Proposal` proposal <br/>`Compactu32` length_bound <br/> |
+|Propose |    |   |   | `Compactu32` threshold <br/>`Proposal` proposal <br/>`Compactu32` length_bound <br/> |
 |Vote |    | :heavy_check_mark: |   | `Hash` proposal <br/>`Compactu32` index <br/>`bool` approve <br/> |
 |Close |    | :heavy_check_mark: |   | `Hash` proposal_hash <br/>`Compactu32` index <br/>`Compactu64` proposal_weight_bound <br/>`Compactu32` length_bound <br/> |
 |Disapprove proposal |    | :heavy_check_mark: |   | `Hash` proposal_hash <br/> |
@@ -246,17 +246,17 @@ Please:
 | :---------- |:------------:|:--------:|:--------:|:--------|
 |Vest |    | :heavy_check_mark: |   |  |
 |Vest other |    | :heavy_check_mark: |   | `LookupasStaticLookupSource` target <br/> |
-|Vested transfer |    |   |   | `LookupasStaticLookupSource` target <br/>`VestingInfoBalanceOfTBlockNumber` schedule <br/> |
-|Force vested transfer |    |   |   | `LookupasStaticLookupSource` source <br/>`LookupasStaticLookupSource` target <br/>`VestingInfoBalanceOfTBlockNumber` schedule <br/> |
+|Vested transfer |    |   |   | `LookupasStaticLookupSource` target <br/>`VestingInfo` schedule <br/> |
+|Force vested transfer |    |   |   | `LookupasStaticLookupSource` source <br/>`LookupasStaticLookupSource` target <br/>`VestingInfo` schedule <br/> |
 |Merge schedules |    | :heavy_check_mark: |   | `u32` schedule1_index <br/>`u32` schedule2_index <br/> |
 
 ## Utility
 
 | Name        | Light | XL | Nesting | Arguments |
 | :---------- |:------------:|:--------:|:--------:|:--------|
-|Batch |    | :heavy_check_mark: |   | `VecCall` calls <br/> |
+|Batch | :heavy_check_mark:  | :heavy_check_mark: |   | `VecCall` calls <br/> |
 |As derivative |    |   |   | `u16` index <br/>`Call` call <br/> |
-|Batch all |    | :heavy_check_mark: |   | `VecCall` calls <br/> |
+|Batch all | :heavy_check_mark:  | :heavy_check_mark: |   | `VecCall` calls <br/> |
 |Dispatch as |    |   |   | `BoxPalletsOrigin` as_origin <br/>`Call` call <br/> |
 
 ## Identity
@@ -464,10 +464,10 @@ Please:
 |Approve transfer |    | :heavy_check_mark: |   | `Compactu32` class_ <br/>`Compactu32` instance <br/>`LookupasStaticLookupSource` delegate <br/> |
 |Cancel approval |    |   |   | `Compactu32` class_ <br/>`Compactu32` instance <br/>`OptionLookupasStaticLookupSource` maybe_check_delegate <br/> |
 |Force asset status |    | :heavy_check_mark: |   | `Compactu32` class_ <br/>`LookupasStaticLookupSource` owner <br/>`LookupasStaticLookupSource` issuer <br/>`LookupasStaticLookupSource` admin <br/>`LookupasStaticLookupSource` freezer <br/>`bool` free_holding <br/>`bool` is_frozen <br/> |
-|Set attribute |    |   |   | `Compactu32` class_ <br/>`OptionInstanceId` maybe_instance <br/>`BoundedVecu8KeyLimit` key <br/>`BoundedVecu8ValueLimit` value <br/> |
-|Clear attribute |    |   |   | `Compactu32` class_ <br/>`OptionInstanceId` maybe_instance <br/>`BoundedVecu8KeyLimit` key <br/> |
-|Set metadata |    |   |   | `Compactu32` class_ <br/>`Compactu32` instance <br/>`BoundedVecu8StringLimit` data <br/>`bool` is_frozen <br/> |
+|Set attribute |    |   |   | `Compactu32` class_ <br/>`OptionInstanceId` maybe_instance <br/>`BoundedVecu8` key <br/>`BoundedVecu8` value <br/> |
+|Clear attribute |    |   |   | `Compactu32` class_ <br/>`OptionInstanceId` maybe_instance <br/>`BoundedVecu8` key <br/> |
+|Set metadata |    |   |   | `Compactu32` class_ <br/>`Compactu32` instance <br/>`BoundedVecu8` data <br/>`bool` is_frozen <br/> |
 |Clear metadata |    | :heavy_check_mark: |   | `Compactu32` class_ <br/>`Compactu32` instance <br/> |
-|Set class metadata |    |   |   | `Compactu32` class_ <br/>`BoundedVecu8StringLimit` data <br/>`bool` is_frozen <br/> |
+|Set class metadata |    |   |   | `Compactu32` class_ <br/>`BoundedVecu8` data <br/>`bool` is_frozen <br/> |
 |Clear class metadata |    | :heavy_check_mark: |   | `Compactu32` class_ <br/> |
 
