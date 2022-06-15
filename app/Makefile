@@ -27,8 +27,8 @@ all: bin/app.elf
 	@echo "APPNAME=\"${APPNAME}\"" >> $(OUTPUT_INSTALLER)
 	@echo "APPVERSION=\"${APPVERSION}\"" >> $(OUTPUT_INSTALLER)
 	@echo "APPPATH=\""${APPPATH}"\"" >> $(OUTPUT_INSTALLER)
-	@echo "LOAD_PARAMS=\"${APP_LOAD_PARAMS}\"" >> $(OUTPUT_INSTALLER)
-	@echo "DELETE_PARAMS=\"${APP_DELETE_PARAMS}\"" >> $(OUTPUT_INSTALLER)
+	@echo "LOAD_PARAMS=(${APP_LOAD_PARAMS})" >> $(OUTPUT_INSTALLER)
+	@echo "DELETE_PARAMS=(${APP_DELETE_PARAMS})" >> $(OUTPUT_INSTALLER)
 	@echo "APPHEX=\"" >> $(OUTPUT_INSTALLER)
 	@cat $(CURDIR)/bin/app.hex >> $(OUTPUT_INSTALLER)
 	@echo "\"" >> $(OUTPUT_INSTALLER)
@@ -93,9 +93,8 @@ endef
 $(error "$(error_message)")
 endif
 
-space := $(empty) $(empty)
-APP_LOAD_PARAMS = --curve ed25519 --delete $(subst $(APPNAME),$(subst $(space),_,$(APPNAME)),$(COMMON_LOAD_PARAMS)) --path $(APPPATH)
-APP_DELETE_PARAMS = $(subst $(APPNAME),$(subst $(space),_,$(APPNAME)),$(COMMON_DELETE_PARAMS))
+APP_LOAD_PARAMS = --curve ed25519 $(subst $(APPNAME),\"$(APPNAME)\",$(COMMON_LOAD_PARAMS)) --path $(APPPATH)
+APP_DELETE_PARAMS = $(subst $(APPNAME),\"$(APPNAME)\",$(COMMON_DELETE_PARAMS))
 
 ifeq ($(TARGET_NAME),TARGET_NANOS)
 APP_LOAD_PARAMS += --appFlags 0x000
