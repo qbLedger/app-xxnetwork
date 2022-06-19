@@ -169,6 +169,10 @@ DEFINES       += HAVE_BLE_APDU BLE_COMMAND_TIMEOUT_MS=2000
 SDK_SOURCE_PATH  += lib_blewbxx lib_blewbxx_impl
 endif
 
+# Add security review banner. To be removed once Ledger security review is done.
+APP_LOAD_PARAMS += --tlvraw 9F:01
+DEFINES += HAVE_PENDING_REVIEW_SCREEN
+
 # App specific
 
 #Feature temporarily disabled
