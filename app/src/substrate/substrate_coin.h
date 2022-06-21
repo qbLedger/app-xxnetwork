@@ -61,11 +61,8 @@ typedef enum {
 #define COIN_NAME "xx network"
 #define COIN_TICKER "xx "
 
-#define COIN_SECRET_REQUIRED_CLICKS 0
-
 #define MENU_MAIN_APP_LINE1 "xx network"
 #define MENU_MAIN_APP_LINE2 "Ready"
-#define MENU_MAIN_APP_LINE2_SECRET "xx RECOVERY"
 #define APPVERSION_LINE1 "xx network"
 #define APPVERSION_LINE2 "v" APPVERSION
 
